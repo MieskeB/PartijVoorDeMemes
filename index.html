@@ -194,10 +194,9 @@
                         Lijsttrekker, oprichter en kamerlit
                     </p>
                     <p>
-                        Michel Bijnen (1999) is een software engineer en cyber security specialist. Hij wil ervoor
-                        zorgen dat Nederland beter en gezelliger wordt. Hij vindt dat op straat mensen elkaar kunnen
-                        begroeten en niet bang hoeven te zijn dat er ongure dingen gebeuren. Dus eigenlijk dat de
-                        vreugde op straat onderling weer terug kan komen.
+                        Nederland moet gezelliger worden. Ik ben van mening dat op straat mensen elkaar kunnen begroeten
+                        en niet bang hoeven te zijn dat er ongure dingen gebeuren, zodat we met z'n allen in een fijn
+                        land kunnen leven.
                     </p>
                     <p>
                         <button class="w3-button w3-light-grey w3-block" disabled>
@@ -239,7 +238,8 @@
                         Memelord en kamerlit
                     </p>
                     <p>
-                        Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.
+                        Het is voor mij een eer om op democratische wijze een samenleving te mogen construeren waarin
+                        memes de weg vrijmaken tot verbondenheid.
                     </p>
                     <p>
                         <button class="w3-button w3-light-grey w3-block" disabled>
@@ -503,28 +503,28 @@
             <i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: cool@partijvoordememes.nl
         </p>
         <br>
-<!--        <form>-->
-            <p>
-                <input id="contact_name" class="w3-input w3-border" type="text" placeholder="Naam" required name="Naam">
-            </p>
-            <p>
-                <input id="contact_email" class="w3-input w3-border" type="text" placeholder="Email" required
-                       name="Email">
-            </p>
-            <p>
-                <input id="contact_subject" class="w3-input w3-border" type="text" placeholder="Onderwerp" required
-                       name="Onderwerp">
-            </p>
-            <p>
-                <input id="contact_message" class="w3-input w3-border" type="text" placeholder="Bericht" required
-                       name="Bericht">
-            </p>
-            <p>
-                <button class="w3-button w3-black" onclick="contact()">
-                    <i class="fa fa-paper-plane"></i> VERSTUUR BERICHT
-                </button>
-            </p>
-<!--        </form>-->
+        <!--        <form>-->
+        <p>
+            <input id="contact_name" class="w3-input w3-border" type="text" placeholder="Naam" required name="Naam">
+        </p>
+        <p>
+            <input id="contact_email" class="w3-input w3-border" type="text" placeholder="Email" required
+                   name="Email">
+        </p>
+        <p>
+            <input id="contact_subject" class="w3-input w3-border" type="text" placeholder="Onderwerp" required
+                   name="Onderwerp">
+        </p>
+        <p>
+            <input id="contact_message" class="w3-input w3-border" type="text" placeholder="Bericht" required
+                   name="Bericht">
+        </p>
+        <p>
+            <button class="w3-button w3-black" onclick="contact()">
+                <i class="fa fa-paper-plane"></i> VERSTUUR BERICHT
+            </button>
+        </p>
+        <!--        </form>-->
         <!-- Image of location/map -->
         <img src="./assets/img/placeholder.jpg" class="w3-image w3-greyscale" style="width:100%;margin-top:48px">
     </div>
@@ -603,7 +603,7 @@
                 const xhttp = new XMLHttpRequest();
                 const url = apiUrl + "/contact/";
 
-                xhttp.onreadystatechange = function() {
+                xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 204) {
                         console.log('Email sent');
                         document.getElementById('contact_message').value = '';
