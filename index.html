@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./assets/styles/style.css">
 <script src="https://www.google.com/recaptcha/api.js?render=6LcKL_4ZAAAAAI6ye8DGLnK31lBeIQ1vUQ8cymf4"></script>
+<link rel="stylesheet" href="./assets/styles/notifications.css">
+<script src="./assets/scripts/notifications.js"></script>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -501,7 +503,7 @@
             <i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: cool@partijvoordememes.nl
         </p>
         <br>
-        <form onsubmit="contact()">
+<!--        <form>-->
             <p>
                 <input id="contact_name" class="w3-input w3-border" type="text" placeholder="Naam" required name="Naam">
             </p>
@@ -518,11 +520,11 @@
                        name="Bericht">
             </p>
             <p>
-                <button class="w3-button w3-black" type="submit">
+                <button class="w3-button w3-black" onclick="contact()">
                     <i class="fa fa-paper-plane"></i> VERSTUUR BERICHT
                 </button>
             </p>
-        </form>
+<!--        </form>-->
         <!-- Image of location/map -->
         <img src="./assets/img/placeholder.jpg" class="w3-image w3-greyscale" style="width:100%;margin-top:48px">
     </div>
@@ -547,17 +549,25 @@
 </footer>
 
 <script>
+    const successNotification = window.createNotification({
+        closeOnClick: true,
+        displayCloseButton: true,
+        positionClass: 'nfc-top-right',
+        showDuration: 5000,
+        theme: 'success'
+    });
+
     // Modal Image Gallery
     function onClick(element) {
         document.getElementById('img01').src = element.src;
         document.getElementById('modal01').style.display = 'block';
-        var captionText = document.getElementById('caption');
+        let captionText = document.getElementById('caption');
         captionText.innerHTML = element.alt;
     }
 
 
     // Toggle between showing and hiding the sidebar when clicking the menu icon
-    var mySidebar = document.getElementById('mySidebar');
+    let mySidebar = document.getElementById('mySidebar');
 
     function w3_open() {
         if (mySidebar.style.display === 'block') {
@@ -573,7 +583,7 @@
     }
 
 
-    const apiUrl = 'http://localhost:8080'
+    const apiUrl = 'http://localhost:8080';
 
     function contact() {
         const name = document.getElementById('contact_name').value;
@@ -595,9 +605,13 @@
 
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 204) {
-                        console.log(this.responseText);
-                    } else {
-                        console.log("Oopsie woopsie I made a fucky wucky")
+                        console.log('Email sent');
+                        document.getElementById('contact_message').value = '';
+                        document.getElementById('contact_subject').value = '';
+                        successNotification({
+                            title: 'VERZONDEN',
+                            message: 'De email is succesvol verzonden! U zult binnen enkele dagen een reactie krijgen.'
+                        })
                     }
                 }
 
