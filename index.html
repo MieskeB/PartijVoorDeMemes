@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/assets/styles/style.css">
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LcKL_4ZAAAAAI6ye8DGLnK31lBeIQ1vUQ8cymf4"></script>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -501,18 +501,21 @@
             <i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: cool@partijvoordememes.nl
         </p>
         <br>
-        <form action="/action_page.php" target="_blank">
+        <form onsubmit="contact()">
             <p>
-                <input class="w3-input w3-border" type="text" placeholder="Naam" required name="Naam">
+                <input id="contact_name" class="w3-input w3-border" type="text" placeholder="Naam" required name="Naam">
             </p>
             <p>
-                <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                <input id="contact_email" class="w3-input w3-border" type="text" placeholder="Email" required
+                       name="Email">
             </p>
             <p>
-                <input class="w3-input w3-border" type="text" placeholder="Onderwerp" required name="Onderwerp">
+                <input id="contact_subject" class="w3-input w3-border" type="text" placeholder="Onderwerp" required
+                       name="Onderwerp">
             </p>
             <p>
-                <input class="w3-input w3-border" type="text" placeholder="Bericht" required name="Bericht">
+                <input id="contact_message" class="w3-input w3-border" type="text" placeholder="Bericht" required
+                       name="Bericht">
             </p>
             <p>
                 <button class="w3-button w3-black" type="submit">
@@ -567,6 +570,43 @@
     // Close the sidebar with the close button
     function w3_close() {
         mySidebar.style.display = 'none';
+    }
+
+
+    const apiUrl = 'http://localhost:8080'
+
+    function contact() {
+        const name = document.getElementById('contact_name').value;
+        const email = document.getElementById('contact_email').value;
+        const subject = document.getElementById('contact_subject').value;
+        const message = document.getElementById('contact_message').value;
+
+        grecaptcha.ready(function () {
+            //calling execute method to receive a token
+            grecaptcha.execute('6LcKL_4ZAAAAAI6ye8DGLnK31lBeIQ1vUQ8cymf4', {action: 'Contact'}).then(function (token) {
+                const body = {
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message
+                }
+                const xhttp = new XMLHttpRequest();
+                const url = apiUrl + "/contact/";
+
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 204) {
+                        console.log(this.responseText);
+                    } else {
+                        console.log("Oopsie woopsie I made a fucky wucky")
+                    }
+                }
+
+                xhttp.open("POST", url, true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.setRequestHeader("recaptcha", token + "")
+                xhttp.send(JSON.stringify(body));
+            });
+        });
     }
 </script>
 
